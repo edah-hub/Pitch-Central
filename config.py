@@ -4,6 +4,9 @@ class Config:
 
 
     SECRET_KEY = os.environ.get('SECRET_KEY')
+    
+class TestConfig(Config):
+  SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://moringa:Access@localhost/pitchapp_test'
 
 
 
@@ -21,6 +24,6 @@ class DevConfig(Config):
 config_options = {
 'development':DevConfig,
 'production':ProdConfig,
-# 'test':TestConfig
+'test':TestConfig
 
 }

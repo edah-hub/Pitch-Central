@@ -1,6 +1,9 @@
 {% extends 'bootstrap/base.html'%}
 
-{% include 'navbar.html' %}
+ <!-- Navbar block-->
+ {% block navbar %}
+ {% include 'navbar.html' %}
+{% endblock navbar %}
 <!DOCTYPE html>
 <html>
     <head>
@@ -16,13 +19,30 @@
     </head>
     <body>
 
-
+        <div class="container">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              {% for category, message in messages %}
+                <div class="alert alert-{{category}}">
+                  {{ message }}
+                </div>
+              {% endfor %}
+      
+            {% endif %}
+          {% endwith %}
 
         <!-- Content block -->
 
         {% block content %}
 
         {% endblock%}
+
+        <footer class="page-footer">
+            <div class="footer-copyright text-center">
+              <h6>© 2022 Copyright: Chepngetich Edah</h6>
+            </div>
+          </footer>
+        
 
 
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

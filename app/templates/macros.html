@@ -1,0 +1,27 @@
+{% macro displayPitchList(pitches) %}
+
+  {% for pitch in pitches %}
+    <div class="card m-4 all-pitches">
+      <article class="media content-section">
+        <img class="rounded-circle article-img" src="{{ url_for('static', filename='images/' + pitch.author.image_file)}}">
+        <div class="media-body">
+          <div class="article-metadata">
+            <a class="mr-2" href="{{ url_for ('users.user_account', username=pitch.author.username) }}">{{ pitch.author.username }}</a>
+           <p class="tag"><i class="fa fa-tags"></i>{{ pitch.category }}</p>
+          </div>
+          <h2><a class="article-title" href="{{ url_for('pitches.new_comment', pitch_id=pitch.id)}}">{{ pitch.title }}</a></h2>
+          <p class="article-content">{{ pitch.content }}</p>
+          <div>
+            <a href="{{url_for('pitches.new_comment', pitch_id = pitch.id)}}"><i class="fa fa-comments"></i></a>
+            <a href="{{url_for('pitches.upvote', pitch_id = pitch.id)}}"><i class="fa fa-thumbs-up">{{ pitch.upvotes.count() }}</i></a>
+            <a href="{{url_for('pitches.downvote', pitch_id = pitch.id)}}"><i class="fa fa-thumbs-down">{{ pitch.downvotes.count() }}</i></a>
+            <small class="text-muted tag" style="margin: 15px;"><b>Posted on:</b> {{ pitch.pub_date.strftime('%Y/%m/%d')}}</small>
+          </div>
+        </div>
+      </article>  
+    </div>
+  {% endfor %}
+
+{% endmacro %}
+
+

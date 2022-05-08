@@ -17,3 +17,20 @@ def new_pitch():
     flash('Your pitch has been posted!', 'success')
     return redirect(url_for('main.index'))
   return render_template('create_pitch.html', title='New Pitch', form=form, legend='New Post')
+
+@pitches.route('/pitch/<int:pitch_id>', methods=['GET', 'POST'])
+@login_required
+def new_comment(pitch_id):
+  pitch = Pitch.query.get_or_404(pitch_id)
+  form =  CommentForm()
+
+  if form.validate_on_submit():
+    comment = Comment(content=form.content.data, author=current_user, pitch_id = pitch_id)
+    db.session.add(comment)
+    db.session.commit()
+    flash('Your comment has been posted!', 'success')
+    return redirect(url_for('pitches.new_comment', pitch_id= pitch_id))
+    
+  all_comments = Comment.query.filter_by(pitch_id = pitch_id).all()
+
+  return render_template('pitch.html', form=form, legend='Leave a Comment', pitch=pitch, comments=all_comments, title=pitch.title)
