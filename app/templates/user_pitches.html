@@ -1,0 +1,10 @@
+
+{% import 'macros.html' as macro%}
+
+{% extends "layout.html" %}
+
+{% block content %}
+
+  {{ macro.displayPitchList(pitches) }}
+
+{% endblock content %}
