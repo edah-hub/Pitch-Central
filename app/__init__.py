@@ -19,6 +19,7 @@ def create_app(config_name):
     
         # Initializing flask extensions
     bootstrap.init_app(app)
+    db.init_app(app)
     
         # Registering the blueprint
     from .main import main as main_blueprint
