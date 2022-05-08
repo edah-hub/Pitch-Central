@@ -1,0 +1,3 @@
+Hello {{user.username}}
+Welcome to Pitch Central
+We have just seen you have signed up for our application and want to welcome you to the family. Please enjoy the reading our pitches,downvote or upvote and add your own pitch
