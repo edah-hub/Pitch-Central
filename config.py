@@ -6,6 +6,8 @@ class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY')
     # MAIL_SERVER = 'smtp.googlemail.com'
     # MAIL_PORT = 587
+    UPLOADED_PHOTOS_DEST ='app/static/photos'
+    
     MAIL_USE_TLS = True
         #  email configurations
     MAIL_SERVER = 'smtp.googlemail.com'
