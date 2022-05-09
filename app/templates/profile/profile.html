@@ -1,5 +1,9 @@
 {% extends 'base.html'%}
 
+{% if user == current_user %}
+    <a href="{{url_for('main.update_profile',uname=user.username)}}">Edit profile</a>
+{% endif %}
+
 {% block content %}
 <div class="container">
 <div class="row">
