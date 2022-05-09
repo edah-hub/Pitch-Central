@@ -7,6 +7,10 @@ from .. import db
 from email import mail_message
 
 
+@auth.route('/login')
+def login():
+    return render_template('auth/login.html')
+
 @auth.route('/register',methods = ["GET","POST"])
 def register():
     form = RegistrationForm()
