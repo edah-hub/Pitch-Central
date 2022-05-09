@@ -4,10 +4,12 @@ from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_mail import Mail
 from config import config_options
+from flask_simplemde import SimpleMDE
 from flask_uploads import UploadSet,configure_uploads,IMAGES
 
 
 db = SQLAlchemy()
+simple = SimpleMDE()
 bcrypt = Bcrypt()
 login_manager = LoginManager()
 login_manager.session_protection = 'strong'
@@ -32,6 +34,7 @@ def create_app(config_name):
   bcrypt.init_app(app)
   login_manager.init_app(app)
   mail.init_app(app)
+  simple.init_app(app)
 
 
   from app.users.views import users

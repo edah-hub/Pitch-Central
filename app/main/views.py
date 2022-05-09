@@ -1,5 +1,6 @@
 from flask import render_template,request,redirect,url_for,abort
 from ..models import User
+from flask_login import login_required, current_user
 from .forms import UpdateProfile
 from .. import db,photos
 
