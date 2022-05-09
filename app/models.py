@@ -1,5 +1,6 @@
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from datetime import datetime
+from werkzeug.security import generate_password_hash,check_password_hash
 from flask import current_app
 from app import db, login_manager
 from flask_login import UserMixin, current_user
@@ -22,6 +23,19 @@ class User(db.Model, UserMixin):
   comments = db.relationship('Comment', backref='author', lazy='dynamic')
   upvotes = db.relationship('Upvote', backref = 'author', lazy='dynamic')
   downvotes = db.relationship('Downvote', backref = 'author', lazy='dynamic')
+
+#   pass_secure  = db.Column(db.String(255))
+#     @property
+#     def password(self):
+#         raise AttributeError('You cannnot read the password attribute')
+
+#     @password.setter
+#     def password(self, password):
+#         self.password_hash = generate_password_hash(password)
+
+
+#     def verify_password(self,password):
+#         return check_password_hash(self.password_hash,password)
 
   def get_reset_token(self, expires_sec=1800):
     s = Serializer(current_app.config['SECRET_KEY'], expires_sec)
