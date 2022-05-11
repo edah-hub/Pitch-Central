@@ -103,12 +103,9 @@
       <div>
         <ul class="nav navbar-nav navbar-right">
           {% if current_user.is_authenticated %}
-          <li>
-            <a href="{{url_for('main.profile',uname=current_user.username)}}"
-              >Profile</a
-            >
+          <li><a href="{{url_for('main.profile',uname=current_user.username)}}">Profile</a>
           </li>
-          <li style="color: white; padding: 15px">{{current_user.username}}</li>
+          <!-- <li style="color: rgb(21, 91, 123); padding: 15px">{{current_user.username}}</li> -->
           <li><a href="{{url_for('users.logout')}}">Sign out</a></li>
           {% else %}
           <li><a href="{{url_for('users.login')}}">Sign in</a></li>

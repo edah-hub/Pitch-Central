@@ -12,7 +12,7 @@ from flask_login import login_required
 # main = Blueprint('main', __name__)
 
 @main.route('/')
-# @main.route('/home')
+@main.route('/home')
 def index():
 
   title = "Welcome to Pitch Central"
