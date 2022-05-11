@@ -44,7 +44,7 @@ As a user, you will be able to:
 
 ## Setup/Installation Requirements
 
-1. Clone the application by running git clone https://github.com/Brenda-M/pitch-capital.git on the teminal.
+1. Clone the application by running git clone https://github.com/edah-hub/Pitch-Central.git on the teminal.
 2. Create a virtual environment.
 3. Run `Pip3 install -r requirements.txt` on your terminal.
 4. Add `export SQLALCHEMY_DATABASE_URI=postgresql+psycopg2://{User Name}:{password}@localhost/{database name}` to the start.sh file to export the database configuration.
