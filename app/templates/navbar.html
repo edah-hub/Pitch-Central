@@ -1,28 +1,127 @@
-<div class="navbar navbar-inverse" role="navigation">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/"> Pitch Central </a>
+<nav
+  class="mb-1 navbar navbar-expand-lg navbar-light bg-light text-white navbar-fixed-top"
+>
+  <a class="navbar-brand" href="#">Pitch central</a>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarSupportedContent-333"
+    aria-controls="navbarSupportedContent-333"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{{ url_for('main.index') }}">Home </a>
+      </li>
+      <li class="nav-item dropdown">
+        <a
+          class="nav-link dropdown-toggle"
+          id="navbarDropdownMenuLink-333"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+          >Categories
+        </a>
+        <div
+          class="dropdown-menu dropdown-default"
+          aria-labelledby="navbarDropdownMenuLink-333"
+        >
+          <a class="dropdown-item" href="/categories/productpitch"
+            >Product Pitch</a
+          >
+          <a class="dropdown-item" href="/categories/elevatorpitch"
+            >Elevator Pitch</a
+          >
+          <a class="dropdown-item" href="/categories/pickuplines"
+            >Pickup Lines</a
+          >
+          <a class="dropdown-item" href="/categories/randompitch"
+            >Random Pitch</a
+          >
         </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li><a href="/">Home</a></li>
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto nav-flex-icons">
+      <li class="nav-item">
+        <a class="nav-link waves-effect waves-light">
+          <i class="fa fa-facebook"></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-effect waves-light">
+          <i class="fa fa-twitter"></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-effect waves-light">
+          <i class="fa fa-instagram"></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-effect waves-light">
+          <i class="fab fa-google-plus-g"></i>
+        </a>
+      </li>
+      {% if current_user.is_authenticated %}
+      <li class="nav-item dropdown">
+        <a
+          class="nav-link dropdown-toggle"
+          id="navbarDropdownMenuLink-333"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          <i class="fa fa-user"></i>
+        </a>
+        <div
+          class="dropdown-menu dropdown-menu-right dropdown-default"
+          aria-labelledby="navbarDropdownMenuLink-333"
+        >
+          <a class="dropdown-item" href="{{ url_for('pitches.new_pitch') }}"
+            >New Pitch</a
+          >
+          <a
+            class="dropdown-item"
+            href="{{ url_for('users.user_account', username=current_user.username) }}"
+            >My Profile</a
+          >
+          <a class="dropdown-item" href="{{ url_for('users.update_account') }}"
+            >Update Account</a
+          >
+          <a class="dropdown-item" href="{{ url_for('users.logout') }}"
+            >Logout</a
+          >
         </div>
+      </li>
+      {% else %}
 
-    </div>
-</div>
-
-<ul class="nav navbar-nav navbar-right">
-    {% if current_user.is_authenticated %}
-    <li><a href="{{url_for('main.profile',uname=current_user.username)}}">Profile</a></li>
-    <li><a href="{{url_for('auth.logout')}}">Sign out</a></li>
-    {% else %}
-    <li><a href="{{url_for('auth.login')}}">Sign in</a></li>
-    {%endif%}
-  </ul>
-  
+      <div>
+        <ul class="nav navbar-nav navbar-right">
+          {% if current_user.is_authenticated %}
+          <li>
+            <a href="{{url_for('main.profile',uname=current_user.username)}}"
+              >Profile</a
+            >
+          </li>
+          <li style="color: white; padding: 15px">{{current_user.username}}</li>
+          <li><a href="{{url_for('users.logout')}}">Sign out</a></li>
+          {% else %}
+          <li><a href="{{url_for('users.login')}}">Sign in</a></li>
+          {%endif%}
+        </ul>
+      </div>
+      <!-- <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('users.register') }}">Sign Up</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('users.login') }}">Log in</a>
+        </li> -->
+      {% endif %}
+    </ul>
+  </div>
+</nav>

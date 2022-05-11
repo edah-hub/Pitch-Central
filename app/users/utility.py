@@ -21,7 +21,7 @@ def save_profile_picture(form_picture):
 def send_reset_email(user):
   token = user.get_reset_token()
   msg = Message('Password Reset Request', sender='noreplaymail84@gmail.com', recipients=[user.email])
-  msg.body = f''' We heard that you lost your PitchCapital password. Sorry about that! \n But don’t worry! You can use the following link to reset your password: {url_for('users.reset_token',token=token, _external=True)}
+  msg.body = f''' We heard that you lost your Pitchcentral password. Sorry about that! \n But don’t worry! You can use the following link to reset your password: {url_for('users.reset_token',token=token, _external=True)}
 
   If you did not make this request then simply ignore this email. 
 
@@ -30,7 +30,7 @@ def send_reset_email(user):
   mail.send(msg)
 
 def send_welcome_email(user_email):
-  msg = Message('Welcome to PitchCapital', sender='noreplaymail84@gmail.com', recipients=[user_email])
-  msg.body = ''' Welcome to PitchCapital! An important skill for those looking to build their career is learning to effectively sell oneself and the value they have to offer. PitchCapital will allow you to build this skill by exposing you to a variety of insightful pitches from other users from across the globe. \n Get started by posting your first pitch today.
+  msg = Message('Welcome to Pitchcentral', sender='noreplaymail84@gmail.com', recipients=[user_email])
+  msg.body = ''' Welcome to Pitchcentral! An important skill for those looking to build their career is learning to effectively sell oneself and the value they have to offer. Pitchcentral will allow you to build this skill by exposing you to a variety of insightful pitches from other users from across the globe. \n Get started by posting your first pitch today.
   '''
   mail.send(msg)

@@ -1,11 +1,44 @@
 from flask import Blueprint, render_template, redirect, url_for, request, flash
 from flask_login import login_user, current_user, logout_user, login_required
 from app import db, bcrypt
+from ..email import mail_message
 from app.models import User, Pitch
 from app.users.forms import RegistrationForm, LoginForm, UpdateAccountForm, RequestResetForm, ResetPasswordForm
 from app.users.utility import save_profile_picture, send_reset_email, send_welcome_email
 
 users = Blueprint('users', __name__)
+
+# @users.route('/login',methods=['GET','POST'])
+# def login():
+#     login_form = LoginForm()
+#     if login_form.validate_on_submit():
+#         user = User.query.filter_by(email = login_form.email.data).first()
+#         if user is not None and user.verify_password(login_form.password.data):
+#             login_user(user,login_form.remember.data)
+#             return redirect(request.args.get('next') or url_for('main.index'))
+#             flash('Invalid username or Password')
+#             title = "Pitch Central login"
+#     # return render_template('login.html',login_form = login_form,title=title)
+#             return redirect(next_page) if next_page else redirect(url_for('main.index'))   
+#         else:
+#             flash('Login Unsuccessful. Please check email and password', 'danger')
+
+#     return render_template('auth/login.html', title='Login', form=login_form)
+# ....
+# @users.route('/register',methods = ["GET","POST"])
+# def register():
+#     form = RegistrationForm()
+#     if form.validate_on_submit():
+#         user = User(email = form.email.data, username = form.username.data,password = form.password.data)
+#         db.session.add(user)
+#         db.session.commit()
+#         mail_message("Welcome to Pitch Central","email/welcome_user",user.email,user=user)
+#         return redirect(url_for('users.login'))
+#         title = "New Account"
+#     # return render_template('register.html',registration_form = form)
+#     return redirect(url_for('users.login'))
+#     return render_template('register.html', title='Register', form=form)
+
 
 @users.route('/register', methods=['GET', 'POST'])
 def register():
@@ -38,7 +71,7 @@ def login():
     else:
       flash('Login Unsuccessful. Please check email and password', 'danger')
 
-  return render_template('login.html', title='Login', form=form)
+  return render_template('auth/login.html', title='Login', form=form)
 
 @users.route('/logout')
 def logout():
@@ -55,7 +88,7 @@ def reset_request():
     send_reset_email(user)
     flash('Check your email for a link to reset your password.', 'info')
     return redirect(url_for('users.login'))
-  return render_template('reset_request.html', title='Reset Password', form=form)
+  return render_template('profile/reset_request.html', title='Reset Password', form=form)
 
 @users.route('/reset_password/<token>', methods=['GET', 'POST'])
 def reset_token(token): 
@@ -72,14 +105,14 @@ def reset_token(token):
     db.session.commit()
     flash('Your password has been updated! You can now login to your account', 'success')
     return redirect(url_for('users.login'))
-  return render_template('reset_token.html', title='Reset Password', form=form)
+  return render_template('profile/reset_token.html', title='Reset Password', form=form)
 
 @users.route('/user/<string:username>')
 def user_account(username):
   user = User.query.filter_by(username=username).first_or_404()
   pitches = Pitch.query.filter_by(author=user).order_by(Pitch.pub_date.desc())
   image_file= url_for('static', filename=f'images/{user.image_file}')
-  return render_template('profile.html', pitches=pitches, user=user, image_file=image_file,)
+  return render_template('profile/profile.html', pitches=pitches, user=user, image_file=image_file,)
 
 @users.route('/update_account', methods=['GET', 'POST'])
 @login_required
@@ -98,6 +131,6 @@ def update_account():
     form.username.data = current_user.username
     form.email.data = current_user.email
   image_file= url_for('static', filename=f'images/{current_user.image_file}')
-  return render_template('update_account.html', title='Account', image_file=image_file, form=form)
+  return render_template('profile/update_account.html', title='Account', image_file=image_file, form=form)
 
 

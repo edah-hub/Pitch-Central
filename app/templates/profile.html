@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% import 'macros.html' as macro%}
+
+{% block content %}
+  <div class="container content">
+    <div class="row">
+      <div class="col-md-3 user-media">
+        <h2 class="article-title text-center mb-4" style="font-weight: bold; font-size: 40px;"> <u>User profile</u></h2>
+        <div class="media">
+          <img src="{{ image_file }}" alt="" class="rounded-circle account-img" width=150, height=150>
+          <div class="media-body">
+            <h2 class="account-heading"> {{ user.username }}</h2>
+            {% if current_user.is_authenticated %}
+            <p class="text-secondary">  {{ user.email }}</p>
+            {% endif %}
+          </div>
+        </div>   
+      </div>
+      <div class="col-md-1"></div>
+      <div class="col-md-8">
+        <h2 class="article-title text-center mt-4" style="font-weight: bold; font-size: 40px;"> <u>Pitches by {{ user.username }} ({{ pitches.count() }}) </u> </h2>
+        {{ macro.displayPitchList(pitches) }}
+      </div>
+    </div>
+  </div>
+{% endblock content %}

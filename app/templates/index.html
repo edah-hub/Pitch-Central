@@ -1,16 +1,29 @@
-{% extends 'base.html'%}
-{% import 'macros.html' as macro%} 
+{% extends "base.html" %}
+{% import 'macros.html' as macro%}
 
-
-
-
-<!-- Styles block -->
-
- {% block styles%}
-    {{ super() }}
-    <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
-{% endblock %}
 
 {% block content %}
 
-{% endblock %}
+  <div class="container all-pitches">
+    <div class="row">
+      <div class="col-md-9">
+        {{ macro.displayPitchList(pitches) }}
+      </div>
+      
+        <div class="category-section col-md-3">
+          <div class="card">
+          <h3 class="article-title text-center mt-8"><b>Pitch Categories</b></h3>
+            <ul class="list-unstyled">     
+              <li class="list-group-item"><a href="/categories/productpitch">Random Pitch</a></li>
+              <li class="list-group-item"><a href="/categories/elevatorpitch">Elevator Pitch</a></li>
+              <li class="list-group-item"> <a href="/categories/pickuplines">Pickup Lines</a></li>
+              <li class="list-group-item"><a href="/categories/randompitch">Product Pitch</a></li>
+            </ul>
+        </div>
+      </div>
+      
+    </div>
+  </div> 
+
+ 
+{% endblock content %}

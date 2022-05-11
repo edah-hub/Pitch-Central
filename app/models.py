@@ -10,49 +10,96 @@ from flask_login import UserMixin, current_user
 def load_user(user_id):
   return User.query.get(int(user_id))
 
-class User(db.Model, UserMixin):
 
-  __tablename__ = 'users'
 
-  id = db.Column(db.Integer, primary_key = True)
-  username = db.Column(db.String(200), unique=True, nullable =False)
-  email = db.Column(db.String(120), unique=True, nullable =False)
-  profile_pic_path = db.Column(db.String(120), nullable =False, default='default.jpg')
-  password = db.Column(db.String(60), nullable =False)
-  pitch = db.relationship('Pitch', backref='author', lazy='dynamic')
-  comments = db.relationship('Comment', backref='author', lazy='dynamic')
-  upvotes = db.relationship('Upvote', backref = 'author', lazy='dynamic')
-  downvotes = db.relationship('Downvote', backref = 'author', lazy='dynamic')
+class User(UserMixin,db.Model):
+    __tablename__='users'
+    id= db.Column(db.Integer,primary_key=True)
+    username= db.Column(db.String(255))
+    email = db.Column(db.String(255),unique = True,index = True)
+    bio = db.Column(db.String(255))
+    profile_pic_path = db.Column(db.String())
+    pass_secure = db.Column(db.String(255))
+    pitches = db.relationship('Pitch', backref='user', lazy='dynamic')
+    comment = db.relationship('Comment', backref='user', lazy='dynamic')
+    upvote = db.relationship('Upvote',backref='user',lazy='dynamic')
+    downvote = db.relationship('Downvote',backref='user',lazy='dynamic')
+    @property
+    def password(self):
+        raise AttributeError('You cannot read the password attribute')
+    @password.setter
+    def password(self, password):
+        self.pass_secure = generate_password_hash(password)
+    def verify_password(self,password):
+        return check_password_hash(self.pass_secure,password)
+    def save_u(self):
+        db.session.add(self)
+        db.session.commit()
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+    def __repr__(self):
+        return f'User{self.username}'
 
-#   pass_secure  = db.Column(db.String(255))
+# class User(db.Model, UserMixin):
+
+#     __tablename__ = 'users'
+
+#     id = db.Column(db.Integer, primary_key = True)
+#     username = db.Column(db.String(200))
+#     email = db.Column(db.String(120),  nullable =False)
+#     profile_pic_path = db.Column(db.String(120), nullable =False, default='default.jpg')
+#     password = db.Column(db.String(60), nullable =False)
+#     pitch = db.relationship('Pitch', backref='author', lazy='dynamic')
+#     comments = db.relationship('Comment', backref='author', lazy='dynamic')
+#     upvotes = db.relationship('Upvote', backref = 'author', lazy='dynamic')
+#     downvotes = db.relationship('Downvote', backref = 'author', lazy='dynamic')
+
+#     pass_secure  = db.Column(db.String(255))
 #     @property
 #     def password(self):
 #         raise AttributeError('You cannnot read the password attribute')
+      
+    
 
+#     # @password.setter
+#     # def password(self, password):
+#     #     self.password_hash = generate_password_hash(password)
+        
 #     @password.setter
 #     def password(self, password):
-#         self.password_hash = generate_password_hash(password)
+#         self.pass_secure = generate_password_hash(password)
+#     def verify_password(self,password):
+#         return check_password_hash(self.pass_secure,password)
+#     def save_u(self):
+#         db.session.add(self)
+#         db.session.commit()
+#     def delete(self):
+#         db.session.delete(self)
+#         db.session.commit()
+#     def __repr__(self):
+#         return f'User{self.username}'
 
 
 #     def verify_password(self,password):
 #         return check_password_hash(self.password_hash,password)
 
-  def get_reset_token(self, expires_sec=1800):
-    s = Serializer(current_app.config['SECRET_KEY'], expires_sec)
-    return s.dumps({'user_id': self.id}).decode('utf-8')
-  
-  @staticmethod
-  def verify_reset_token(token):
-    s = Serializer(current_app.config['SECRET_KEY'])
-    try:
-      user_id = s.loads(token)['user_id']
-    except:
-      return None
-    return User.query.get(user_id)
+    # def get_reset_token(self, expires_sec=1800):
+    #   s = Serializer(current_app.config['SECRET_KEY'], expires_sec)
+    #   return s.dumps({'user_id': self.id}).decode('utf-8')
+    
+    # @staticmethod
+    # def verify_reset_token(token):
+    #   s = Serializer(current_app.config['SECRET_KEY'])
+    #   try:
+    #     user_id = s.loads(token)['user_id']
+    #   except:
+    #     return None
+    #   return User.query.get(user_id)
 
 
-  def __repr__(self):
-    return(f"User('{self.username}', '{self.email}', '{self.image_file}')")
+    # def __repr__(self):
+    #   return(f"User('{self.username}', '{self.email}', '{self.image_file}')")
 
 class Pitch(db.Model):
 

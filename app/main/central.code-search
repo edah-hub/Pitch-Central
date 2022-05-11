@@ -1,0 +1,24 @@
+# Query: central
+
+10 results - 6 files
+
+app/auth/views.py:
+  23:         mail_message("Welcome to pitch central","email/welcome_user",user.email,user=user)
+  40:     title = "pitch central login"
+
+app/main/views.py:
+  18:   title = "Welcome to Pitch Central"
+
+app/templates/base.html:
+  11:         <title> Home - Pitch Central </title>
+
+app/templates/navbar.html:
+  4:   <a class="navbar-brand" href="#">Pitch central</a>
+
+app/templates/email/welcome_user.txt:
+  2: Welcome to Pitch Central
+
+app/users/utility.py:
+  24:   msg.body = f''' We heard that you lost your Pitchcentral password. Sorry about that! \n But don’t worry! You can use the following link to reset your password: {url_for('users.reset_token',token=token, _external=True)}
+  33:   msg = Message('Welcome to Pitch central', sender='noreplaymail84@gmail.com', recipients=[user_email])
+  34:   msg.body = ''' Welcome to Pitch central! An important skill for those looking to build their career is learning to effectively sell oneself and the value they have to offer. Pitchcentral will allow you to build this skill by exposing you to a variety of insightful pitches from other users from across the globe. \n Get started by posting your first pitch today.
