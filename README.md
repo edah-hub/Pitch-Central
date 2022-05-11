@@ -29,7 +29,7 @@ As a user, you will be able to:
 <li>Python</li>
 <li>Flask</li>
 <li>HTML, CSS and Bootstrap</li>
-<li>Javascript</li>
+
 </ul>
 
 ## BBD
