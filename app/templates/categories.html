@@ -5,7 +5,6 @@
     {% for cat in category %}
       <div class="card m-4">
         <article class="media content-section">
-          <img class="rounded-circle article-img" src="{{ url_for('static', filename='images/' + cat.author.image_file)}}">
           <div class="media-body">
             <div class="article-metadata">
               <a class="mr-2" href="#">{{ cat.author.username }}</a> 

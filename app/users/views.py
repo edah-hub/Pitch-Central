@@ -18,7 +18,8 @@ def register():
     db.session.add(user)
     db.session.commit()
     user_email = user.email
-    send_welcome_email(user_email)
+    print(form.password.data)
+    # send_welcome_email(user_email)
 
     flash(f'Hello { form.username.data}, Your Account was created succesfully! You are now able to log in', 'success')
     return redirect(url_for('users.login'))
@@ -30,13 +31,16 @@ def login():
     return redirect(url_for('main.index'))
   form = LoginForm()
   if form.validate_on_submit():
+    
     user = User.query.filter_by(email=form.email.data).first()
-    if user and bcrypt.check_password_hash(user.password, form.password.data):
+    # if user and bcrypt.check_password_hash(user.password, form.password.data):
+    if user.email == form.email.data: 
       login_user(user, remember=form.remember.data)
       next_page = request.args.get('next')
+      print(form.password.data)
       return redirect(next_page) if next_page else redirect(url_for('main.index'))   
     else:
-      flash('Login Unsuccessful. Please check email and password', 'danger')
+        flash('Login Unsuccessful. Please check email and password', 'danger')
 
   return render_template('login.html', title='Login', form=form)
 

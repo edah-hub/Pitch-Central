@@ -3,10 +3,10 @@
   {% for pitch in pitches %}
     <div class="card m-4 all-pitches">
       <article class="media content-section">
-        <img class="rounded-circle article-img" src="{{ url_for('static', filename='images/' + pitch.author.image_file)}}">
+      
         <div class="media-body">
           <div class="article-metadata">
-            <a class="mr-2" href="{{ url_for ('users.user_account', username=pitch.author.username) }}">{{ pitch.author.username }}</a>
+            
            <p class="tag"><i class="fa fa-tags"></i>{{ pitch.category }}</p>
           </div>
           <h2><a class="article-title" href="{{ url_for('pitches.new_comment', pitch_id=pitch.id)}}">{{ pitch.title }}</a></h2>

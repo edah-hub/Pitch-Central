@@ -30,7 +30,7 @@ def send_reset_email(user):
   mail.send(msg)
 
 def send_welcome_email(user_email):
-  msg = Message('Welcome to PitchCapital', sender='noreplaymail84@gmail.com', recipients=[user_email])
-  msg.body = ''' Welcome to PitchCapital! An important skill for those looking to build their career is learning to effectively sell oneself and the value they have to offer. PitchCapital will allow you to build this skill by exposing you to a variety of insightful pitches from other users from across the globe. \n Get started by posting your first pitch today.
+  msg = Message('Welcome to Pitch Central', sender='noreplaymail84@gmail.com', recipients=[user_email])
+  msg.body = ''' Welcome to Pitch Central! An important skill for those looking to build their career is learning to effectively sell oneself and the value they have to offer. PitchCapital will allow you to build this skill by exposing you to a variety of insightful pitches from other users from across the globe. \n Get started by posting your first pitch today.
   '''
   mail.send(msg)

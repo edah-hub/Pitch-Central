@@ -11,7 +11,7 @@ class Config:
     
     MAIL_USE_TLS = True
         #  email configurations
-    MAIL_SERVER = 'smtp.googlemail.com'
+    MAIL_SERVER = 'smtp.googlemail.com:587'
     
     MAIL_PORT = 587
     MAIL_USE_TLS = True
@@ -22,6 +22,7 @@ class Config:
     
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://moringa:Access@localhost/pitch'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    extend_existing=True
     
     # simple mde  configurations
     SIMPLEMDE_JS_IIFE = True

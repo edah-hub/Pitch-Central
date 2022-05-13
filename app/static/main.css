@@ -4,11 +4,11 @@
 }
 
 body{
-  background-color: #1bb4d0;
+  background-color: #121313;
 }
 
 .page-footer{
-  background-color: black;
+  background-color: rgb(33, 128, 150);
   font-weight: bold;
   color: white;
   height: 20vh;
@@ -127,4 +127,5 @@ nav{
   background-size: cover;
   opacity: 0.9;
 }
+
 
