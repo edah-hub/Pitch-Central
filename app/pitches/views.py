@@ -12,7 +12,7 @@ pitches = Blueprint('pitches', __name__)
 def new_pitch():
   form = PitchForm()
   if form.validate_on_submit():
-    pitch = Pitch(title=form.title.data, content=form.content.data, category=form.category.data, author=current_user)
+    pitch = Pitch(title=form.title.data, content=form.content.data, category=form.category.data, user=current_user)
     db.session.add(pitch)
     db.session.commit()
     flash('Your pitch has been posted!', 'success')
@@ -26,7 +26,7 @@ def new_comment(pitch_id):
   form =  CommentForm()
 
   if form.validate_on_submit():
-    comment = Comment(content=form.content.data, author=current_user, pitch_id = pitch_id)
+    comment = Comment(content=form.content.data, user=current_user, pitch_id = pitch_id)
     db.session.add(comment)
     db.session.commit()
     flash('Your comment has been posted!', 'success')
@@ -41,7 +41,7 @@ def new_comment(pitch_id):
 @login_required
 def update_pitch(pitch_id):
   pitch = Pitch.query.get_or_404(pitch_id)
-  if pitch.author != current_user:
+  if pitch.user != current_user:
     abort(403)
   form = PitchForm()
   if form.validate_on_submit():
@@ -59,7 +59,7 @@ def update_pitch(pitch_id):
 @login_required
 def delete_pitch(pitch_id):
   pitch = Pitch.query.get_or_404(pitch_id)
-  if pitch.author != current_user:
+  if pitch.user != current_user:
     abort(403)
   db.session.delete(pitch)
   db.session.commit()
@@ -76,7 +76,7 @@ def upvote(pitch_id):
     if Upvote.query.filter(Upvote.user_id==user.id, Upvote.pitch_id==pitch_id).first():
         return  redirect(url_for('main.index'))
 
-    new_upvote = Upvote(pitch_id=pitch_id, author=current_user)
+    new_upvote = Upvote(pitch_id=pitch_id, user=current_user)
     new_upvote.save_upvotes()
     return redirect(url_for('main.index'))
 
@@ -89,7 +89,7 @@ def downvote(pitch_id):
     if Downvote.query.filter(Downvote.user_id==user.id, Downvote.pitch_id==pitch_id).first():
       return  redirect(url_for('main.index'))
 
-    new_downvote = Downvote(pitch_id=pitch_id, author=current_user)
+    new_downvote = Downvote(pitch_id=pitch_id, user=current_user)
     new_downvote.save_downvotes()
     return redirect(url_for('main.index'))
 

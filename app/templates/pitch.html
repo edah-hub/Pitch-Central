@@ -4,12 +4,12 @@
   <div class="container"> 
     <div class="card">
       <article class="media content-section">
-        <img class="rounded-circle article-img" src="{{ url_for('static', filename='images/' + pitch.author.image_file)}}">
+      
         <div class="media-body">
           <div class="article-metadata">
-            <a class="mr-2" href="#">{{ pitch.author.username }}</a>
+            <a class="mr-2" href="#">{{ pitch.user.username }}</a>
             <small class="text-muted">{{ pitch.pub_date.strftime('%Y/%m/%d')}}</small>
-            {% if pitch.author == current_user %}
+            {% if pitch.user == current_user %}
               <div>
                 <a href="{{ url_for('pitches.update_pitch', pitch_id=pitch.id)}}" class="btn btn-secondary btn-sm mt-1 mb-1">Update</a>
                 <button type="button" class="btn btn-danger btn-sm ml-1" data-toggle="modal" data-target="#deleteModal">Delete</button>
@@ -51,7 +51,7 @@
       <article class="media content-section">
         <div class="media-body">
           <div class="article-metadata">
-            <a class="mr-2" href="#">{{ comment.author.username }}</a>
+            <a class="mr-2" href="#">{{ comment.user.username }}</a>
             <small class="text-muted">{{ comment.date_posted.strftime('%Y/%m/%d')}}</small>
           </div>
           <p class="article-content">{{ comment.content }}</p>

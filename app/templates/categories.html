@@ -1,27 +1,38 @@
-{% extends 'base.html' %}
-
-{% block content %}
-  <div class="container">
-    {% for cat in category %}
-      <div class="card m-4">
-        <article class="media content-section">
-          <div class="media-body">
-            <div class="article-metadata">
-              <a class="mr-2" href="#">{{ cat.author.username }}</a> 
-              <p class="tag"><i class="fa fa-tags"></i>{{ cat.category }}</p>
-            </div>
-            <h2><a class="article-title" href="{{ url_for('pitches.new_comment', pitch_id=cat.id)}}">{{ cat.title }}</a></h2>
-            <p class="article-content">{{ cat.content }}</p>
-            <div>
-              <a href="{{url_for('pitches.new_comment', pitch_id = cat.id)}}"><i class="fa fa-comments"></i></a>
-              <a href="{{url_for('pitches.upvote', pitch_id = cat.id)}}"><i class="fa fa-thumbs-up">{{ cat.upvotes.count() }}</i></a>
-              <a href="{{url_for('pitches.downvote', pitch_id = cat.id)}}"><i class="fa fa-thumbs-down">{{ cat.downvotes.count() }}</i></a>
-              <small class="text-muted tag" style="margin: 15px;"><b>Posted on:</b> {{cat.pub_date.strftime('%Y/%m/%d')}}</small>           
-            </div>
-          </div>
-        </article>
-      </div>  
-    {% endfor %}
+{% extends 'base.html' %} {% block content %}
+<div class="container">
+  {% for cat in category %}
+  <div class="card m-4">
+    <article class="media content-section">
+      <div class="media-body">
+        <div class="article-metadata">
+          <a class="mr-2" href="#">{{ cat.user.username }}</a>
+          <p class="tag"><i class="fa fa-tags"></i>{{ cat.category }}</p>
+        </div>
+        <h2>
+          <a
+            class="article-title"
+            href="{{ url_for('pitches.new_comment', pitch_id=cat.id)}}"
+            >{{ cat.title }}</a
+          >
+        </h2>
+        <p class="article-content">{{ cat.content }}</p>
+        <div>
+          <a href="{{url_for('pitches.new_comment', pitch_id = cat.id)}}"
+            ><i class="fa fa-comments"></i
+          ></a>
+          <a href="{{url_for('pitches.upvote', pitch_id = cat.id)}}"
+            ><i class="fa fa-thumbs-up">{{ cat.upvotes.count() }}</i></a
+          >
+          <a href="{{url_for('pitches.downvote', pitch_id = cat.id)}}"
+            ><i class="fa fa-thumbs-down">{{ cat.downvotes.count() }}</i></a
+          >
+          <small class="text-muted tag" style="margin: 15px"
+            ><b>Posted on:</b> {{cat.pub_date.strftime('%Y/%m/%d')}}</small
+          >
+        </div>
+      </div>
+    </article>
   </div>
+  {% endfor %}
+</div>
 {% endblock content %}
-

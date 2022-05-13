@@ -81,7 +81,7 @@ def reset_token(token):
 @users.route('/user/<string:username>')
 def user_account(username):
   user = User.query.filter_by(username=username).first_or_404()
-  pitches = Pitch.query.filter_by(author=user).order_by(Pitch.pub_date.desc())
+  pitches = Pitch.query.filter_by(username=username).order_by(Pitch.pub_date.desc())
   image_file= url_for('static', filename=f'images/{user.image_file}')
   return render_template('profile.html', pitches=pitches, user=user, image_file=image_file,)
 

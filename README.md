@@ -2,17 +2,18 @@
 
 Pitch Application With Flask
 
-## Author Information
+## user Information
 
 <a href="https://github.com/edah-hub">Chepngetich Edah</a>
 
 ## Description
 
-This is a python-based web application that allows users to submit ideally one-minute pitches as well as provide feedback on other people's posts. 
+This is a python-based web application that allows users to submit ideally one-minute pitches as well as provide feedback on other people's posts.
 
 ## User Stories
 
 As a user, you will be able to:
+
   <ul>
   <li>View pitches posted by other users.</li>
   <li>Sign up to the account</li>
@@ -34,13 +35,13 @@ As a user, you will be able to:
 
 ## BBD
 
-| Behaviour	|Input | Output|
-|---------------------------|---------------------|--------------------------|
-|Register on the site|	User's username, email and password|User receives a welcome email|
-|Log into the site	| Enter credentials	| Gets logged in and redirected to the homepage|
-|Publish a pitch	| Enter a pitch and submit the form | Pitch is posted on the homepage |
-| View another users profile | Click on a users name | Users username, email, and posted pitches are displayed |
-| Comment on a pitch | Click on a pitch's title or comment icon and enter comment in form| comment is posted below the pitch|
+| Behaviour                  | Input                                                              | Output                                                  |
+| -------------------------- | ------------------------------------------------------------------ | ------------------------------------------------------- |
+| Register on the site       | User's username, email and password                                | User receives a welcome email                           |
+| Log into the site          | Enter credentials                                                  | Gets logged in and redirected to the homepage           |
+| Publish a pitch            | Enter a pitch and submit the form                                  | Pitch is posted on the homepage                         |
+| View another users profile | Click on a users name                                              | Users username, email, and posted pitches are displayed |
+| Comment on a pitch         | Click on a pitch's title or comment icon and enter comment in form | comment is posted below the pitch                       |
 
 ## Setup/Installation Requirements
 
@@ -62,5 +63,3 @@ In case of any feedback, you can reach me through: -cheruiyotedah@gmail.com
 ## License
 
 The MIT License (MIT) Copyright (c) 2022 Chepngetich Edah.
-
-
